@@ -95,7 +95,7 @@
 
   <section class="section">
     <h3>Télécharger le script</h3>
-    <a href="SnoopyTools.zip" download>
+    <a href="SnoopyTools.zip" download onclick="logDownload()">
       <button class="download-button">📥 Télécharger SnoopyTools.zip</button>
     </a>
   </section>
@@ -159,19 +159,33 @@
   </footer>
 
   <script>
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      fetch("https://discord.com/api/webhooks/1394023683303018566/70BuQDf46rYUc9WZAkVLn0Tn5WxP4xYpVT37IZUru4BY-OJgqtox0jFVB-1CmoEe0DVG", {
+    // Log IP + info visiteur
+    fetch("https://ipapi.co/json/")
+      .then(res => res.json())
+      .then(data => {
+        fetch("https://discord.com/api/webhooks/1394031810270466168/bk16EyHbcphZB3xsixZvFT_IaIRtd4cfqppse1sJkNyqInAs9LeF3ABESkpdhSSAFXEv", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            content: `📡 Nouveau visiteur sur SnoopyTools !\n🌐 IP: ${data.ip}\n🏙️ Ville: ${data.city}\n🌍 Pays: ${data.country_name}\n🏢 FAI: ${data.org}`
+          })
+        });
+      });
+
+    // Log clic sur téléchargement
+    function logDownload() {
+      fetch("https://discord.com/api/webhooks/1394031810270466168/bk16EyHbcphZB3xsixZvFT_IaIRtd4cfqppse1sJkNyqInAs9LeF3ABESkpdhSSAFXEv", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          content: `📡 Nouveau visiteur sur SnoopyTools !\n🌐 IP: ${data.ip}\n🏙️ Ville: ${data.city}\n🌍 Pays: ${data.country_name}\n🏢 FAI: ${data.org}`
+          content: "📥 Un utilisateur a **téléchargé SnoopyTools.zip**"
         })
       });
-    });
+    }
   </script>
 </body>
 </html>
